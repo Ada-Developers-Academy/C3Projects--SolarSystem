@@ -1,4 +1,4 @@
-# SOLAR SYSTEM RUBRIC
+# √ Victoria Shabunia SOLAR SYSTEM RUBRIC
 
 1=Beginner, 2=Proficient, 3=Master
 
