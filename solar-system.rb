@@ -19,6 +19,8 @@ class Planet
 		@distance_from_the_sun	= planet_hash[:distance_from_the_sun]
 	end
 
+	# determine the local year on the planet relative to earth years
+	# and the formation year of the solar system
 	def local_year
 		current_year = Time.now.year
 		age_in_earth_years = current_year - @solar_system.formation_year
@@ -27,6 +29,7 @@ class Planet
 		puts "The local year on #{@name} is #{@local_year}."
 	end
 
+	# determine the distance from this planet to another specified one, if they were in a straight line
 	def distance_away(other_planet)
 		if @distance_from_the_sun && other_planet.distance_from_the_sun
 			@distance_away = ( @distance_from_the_sun - other_planet.distance_from_the_sun ).abs
@@ -42,8 +45,10 @@ class SolarSystem
 	attr_accessor :planets, :formation_year
 
 	def initialize(solar_system_hash)
+		# initialize solar system with planets if specified
 		if solar_system_hash[:planets]
 			@planets = solar_system_hash[:planets]
+			# assign this solar system to each of the planets
 			solar_system_hash[:planets].each do |planet|
 				planet.solar_system = self
 			end
@@ -63,10 +68,11 @@ class SolarSystem
 			index += 1
 		end
 
-		# print list minus final extra ", "
+		# returns list minus final extra ", "
 		@planets_list = list[0..-3]
 	end
 
+	# manually add planet to solar system
 	def add_planet(new_planet)
 		if new_planet.class == Planet
 			@planets.push(new_planet)
@@ -107,6 +113,7 @@ def show_planet(query_system)
 
 		@selection = gets.chomp.downcase
 
+		# hardcoded case logic for data
 		case @selection
 		when "gaia", "1"
 			show_data( query_system.planets[0] )
@@ -119,7 +126,7 @@ def show_planet(query_system)
 		when "saturn", "5"
 			show_data( query_system.planets[4] )
 		when "stop", "exit"
-			puts "Goodbye."
+			puts "\nGoodbye."
 			@keep_going = false
 		else
 			puts "\n--> That selection is not valid."
@@ -128,6 +135,7 @@ def show_planet(query_system)
 	end
 end
 
+# run a query to offer user planet info
 def test_query
 	@test_system = SolarSystem.new( planets: [
 		Planet.new(	name: "Gaia",
@@ -158,3 +166,5 @@ def test_query
 
 	show_planet( @test_system )
 end
+
+test_query
