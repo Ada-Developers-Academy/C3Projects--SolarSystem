@@ -1,7 +1,7 @@
 require "awesome_print"
 
 class Planet
-  attr_accessor :name, :diameter, :moons, :rings, :color
+  attr_accessor :name, :diameter, :moons, :rings, :color, :rotation_rate
 
   def initialize(planet_hash)
     @name = planet_hash[:name]
@@ -9,6 +9,7 @@ class Planet
     @moons = planet_hash[:moons]
     @rings = planet_hash[:rings]
     @color = planet_hash[:color]
+    @rotation_rate = planet_hash[:rotation] # number of rotations per earth year
   end
 
 end
@@ -22,6 +23,8 @@ class SolarSystem
 
   def initialize
     @system = []
+    @formation_year = 1950 # earth year
+    @current_year = 2015
   end
 
   def create_planet(planet_hash) #create a planet and add it to the solar system
@@ -33,5 +36,12 @@ class SolarSystem
   def number_of_planets
     puts @system.length #counts the number of elements in the array
   end
+
+  # def local_year( )# need to identify which planet to find local year on
+  #   years_passed = @current_year.to_f - @formation_year.to_f
+  #   local_year = years_passed * @rotation_rate.to_f
+  #   puts local_year
+  # end
+
 
 end
