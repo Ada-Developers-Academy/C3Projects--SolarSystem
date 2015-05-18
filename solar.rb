@@ -45,7 +45,7 @@ class SolarSystem
   def initialize(planets_hash = {})   # need to pass in a hash listing planet names as the keys and hashes with planet info as the values
     @planet_list = {}
     planets_hash.each_key do |planet_key|   # for each key inside the hash (that was given to the initializer)...
-      @planet_list[planet_key] = Planet.new(planets_hash[planet_key])   #...and adds the outside key as a key to the instance hash AND assigns that key a new Planet object with the outside hash's planet info hash
+      @planet_list[planet_key] = Planet.new(planets_hash[planet_key])   #...adds the key as a key in the instance hash AND assigns that key a new Planet object using the hashes inside the hash given to the initializer
     end
 
     if @planet_list.length >= 1    # announcements
@@ -80,7 +80,7 @@ class SolarSystem
     @planet_list[planet_name.to_sym].print_info
   end # end of readable_info
 
-  # creates the Ada planet to the solar system
+  # creates the Ada planet in the solar system
   def add_planet_ada
       ada_planet_hash = {
         name: "Ada",
