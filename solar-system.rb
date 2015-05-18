@@ -113,7 +113,7 @@ def show_planet(query_system)
 
 		@selection = gets.chomp.downcase
 
-		# hardcoded case logic for data
+		# case logic for hardcoded data
 		case @selection
 		when "gaia", "1"
 			show_data( query_system.planets[0] )
@@ -135,7 +135,7 @@ def show_planet(query_system)
 	end
 end
 
-# run a query to offer user planet info
+# run a query to offer user planet info from hardcoded data
 def test_query
 	@test_system = SolarSystem.new( planets: [
 		Planet.new(	name: "Gaia",
@@ -167,4 +167,5 @@ def test_query
 	show_planet( @test_system )
 end
 
-test_query
+# To automatically run the user input query, uncheck the method call on the next line
+# test_query
