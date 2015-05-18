@@ -1,12 +1,12 @@
+require 'colorize'
+
 class Planet
-  attr_accessor :mass_kg, :diameter_km, :gravity, :rotation_period_hrs, :length_of_day_hrs, :distance_from_sun_km, :solar_rotation_days, :mean_temp_c, :num_of_moons
-  attr_reader :name
+  attr_accessor :name, :color, :mass_kg, :rotation_period_hrs, :length_of_day_hrs, :distance_from_sun_km, :solar_rotation_days, :mean_temp_c, :num_of_moons
 
   def initialize(name, planet_hash)
     @name                 = name
+    @color                = planet_hash[:color].to_sym
     @mass_kg              = planet_hash[:mass_kg]
-    @diameter_km          = planet_hash[:diameter_km]
-    @gravity              = planet_hash[:gravity]
     @rotation_period_hrs  = planet_hash[:rotation_period_hrs]
     @length_of_day_hrs    = planet_hash[:length_of_day_hrs]
     @distance_from_sun_km = planet_hash[:distance_from_sun_km]
@@ -43,7 +43,9 @@ class SolarSystem
     count = 0
 
     @planets.each do |planet|
-      puts "@planets[#{count}]: #{planet.name}"
+      # for *some* reason, `:blue` doesn't work as an instance variable
+      # totally works if you replace `@color` with `:blue`
+      puts "@planets[#{count}]: " + planet.name.colorize(@color)
     end
   end
 
@@ -60,3 +62,65 @@ class SolarSystem
     puts "The current local year on #{planet.name} is #{present_local_yr}."
   end
 end
+
+# ----------------------------------------------
+
+# Query Program
+# Jeremy suggested a cheater method to have info to work with
+planet_info = [{name: "Mercury", color: :red, mass: "0.330 * 10^24 kg", diameter: "4879 km", length_of_day: "4222.6 hrs", distance_from_sun: "57.9 * 10^6 km"},
+               {name: "Venus", color: :magenta, mass: "4.87 * 10^24 kg", diameter: "12,104 km", length_of_day: "2802 hrs", distance_from_sun: "108.2 * 10^6 km"},
+               {name: "Earth", color: :blue, mass: "5.97 * 10^24 kg", diameter: "5243 km", length_of_day: "24 hrs", distance_from_sun: "149.6 * 10^6 km"}
+]
+
+puts "Hello, student!"
+answer = "yes"
+
+while answer == "yes" || answer == "y"
+  puts "\nWhat planet would you like to learn about?\nYou can select from the following:"
+
+  count = 0
+  planet_info.each do |planet|
+    puts "#{count + 1}. #{planet_info[count][:name].colorize(planet_info[count][:color])}"
+    count +=1
+  end
+
+  puts "…or you can refuse this plethora of knowledge by typing 'exit'."
+  response = gets.chomp
+
+  if response == "exit"
+    puts "\nFine, but you'll be sorry when this planet shrivels up and dies."
+    exit
+  else
+    # then ask for another planet
+    puts "\nCool! Let's learn!"
+    case response
+    when "1", "mercury", "Mercury"
+      index = 0
+    when "2", "venus", "Venus"
+      index = 1
+    when "3", "earth", "Earth"
+      index = 2
+    end
+
+    # error with `index`: no implicit conversion from nil to integer
+    puts "\n++++++++++++++++++++++++++++++++++++"
+    puts "++++++++++++ #{planet_info[index][:name].colorize(planet_info[index][:color])} ++++++++++++".center(50)
+    puts "++++++++++++++++++++++++++++++++++++"
+    puts "mass: #{planet_info[index][:mass]}"
+    puts "diameter: #{planet_info[index][:diameter]}"
+    puts "length of day: #{planet_info[index][:length_of_day]}"
+    puts "distance from sun: #{planet_info[index][:distance_from_sun]}\n "
+  end
+
+  puts "Would you like to learn about more planets? (y/n)"
+  answer = gets.chomp
+end
+
+if answer == "no" || answer == "n"
+  exit
+elsif answer != "yes" || answer != "no" || answer != "y" || answer != "n"
+  puts "That wasn't a valid answer. YES or NO?"
+  answer = gets.chomp
+end
+
+exit
