@@ -13,21 +13,21 @@ class Planet
   end
 
   def to_s
-   "Planet: #{@name} distance: #{@distance} radius: #{@radius} mass: #{@mass} rotation: #{@rotaion}"
+   "Planet: #{@name} distance: #{@distance} radius: #{@radius} mass: #{@mass} rotation: #{@rotation}"
   end
 end
 
 
 class Solar_system
-attr_reader :planet
+attr_reader :planets
 
   def initialize
-    @planet = {}
+    @planets = {}
   end
 
   def add_planet(constant_var_planet)
     key = constant_var_planet.name
-    @planet[key] = constant_var_planet
+    @planets[key] = constant_var_planet
   end
 end
 
@@ -51,28 +51,28 @@ solar_system = Solar_system.new
 # Adding planets to solar_system by calling method add_planet
 # EARTH:
 solar_system.add_planet(earth)
-puts solar_system.planet[earth.name]
+puts solar_system.planets[earth.name]
 
 # MERCURY
 solar_system.add_planet(mercury)
-puts solar_system.planet[mercury.name]
+puts solar_system.planets[mercury.name]
 
 # MARS
 solar_system.add_planet(mars)
-puts solar_system.planet[mars.name]
+puts solar_system.planets[mars.name]
 
 # JUPITER
 solar_system.add_planet(jupiter)
-puts solar_system.planet[jupiter.name]
+puts solar_system.planets[jupiter.name]
 
 # SATURN
 solar_system.add_planet(saturn)
-puts solar_system.planet[saturn.name]
+puts solar_system.planets[saturn.name]
 
 # URANUS
 solar_system.add_planet(uranus)
-puts solar_system.planet[uranus.name]
+puts solar_system.planets[uranus.name]
 
 # NEPTUNE
 solar_system.add_planet(neptune)
-puts solar_system.planet[neptune.name]
+puts solar_system.planets[neptune.name]
