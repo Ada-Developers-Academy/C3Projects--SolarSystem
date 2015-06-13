@@ -7,9 +7,9 @@ class Planet
     @name                = planet_hash[:name]
     @moons               = planet_hash[:moons]
     @color               = planet_hash[:color]
-    @life 				 = planet_hash[:life]
-    @beings 			 = planet_hash[:beings]
-    @galactus_ate_it 	 = planet_hash[:galactus_ate_it]
+    @life                = planet_hash[:life]
+    @beings              = planet_hash[:beings]
+    @galactus_ate_it     = planet_hash[:galactus_ate_it]
     @rate_solar_rotation = planet_hash[:rate_of_solar_rotation]
   end
 
