@@ -13,17 +13,16 @@ end
 
 class SolarSystem
   attr_reader :planets
-  def initialize(planets)
-    # initializes with number of planets... ex: solar = SolarSystem.new(5) gives 5 different planets
-    @planets_array = []
-    # creates an array to hold each new planet
-    planets.times do
-    # runs through the block as many times as specified
-    @planets_array.push(Planet.new)
-    # places new planets into the array
+  def initialize(planet_count)
+    # initializes with number of planets in the SolarSystem
+    @planets = []
+    planet_count.times do
+
+    @planets.push(Planet.new)
     end
-    puts "Your Solar System has #{@planets_array.length} planets!"
-    puts @planets_array
+
+    puts "Your Solar System has #{@planets.length} planets!"
+    puts @planets
     # shows all the planets in the array
 
   end
